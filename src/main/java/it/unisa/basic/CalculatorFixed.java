@@ -1,4 +1,4 @@
-package it.unisa.example;
+package it.unisa.basic;
 
 public class CalculatorFixed {
 
