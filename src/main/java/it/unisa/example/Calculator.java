@@ -7,10 +7,6 @@ public class Calculator {
     }
 
     public int divide(int left, int right) {
-        return left / right;
-    }
-
-    public int divideBySubtract(int left, int right) {
         int num = 0;
         int total = left;
         while (total > 0) {
