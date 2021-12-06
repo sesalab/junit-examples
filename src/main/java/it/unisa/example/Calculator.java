@@ -8,9 +8,9 @@ public class Calculator {
 
     public int divide(int left, int right) {
         int num = 0;
-        int total = left;
-        while (total > 0) {
-            total = total - right;
+        int remainder = left;
+        while (remainder > 0) {
+            remainder = remainder - right;
             num++;
         }
         return num;
