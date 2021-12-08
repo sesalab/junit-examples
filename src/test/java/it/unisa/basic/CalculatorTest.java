@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class CalculatorTest {
 
     @Test
-    @DisplayName("Test the sum using two negative integers")
+    //@DisplayName("Test the sum using two negative integers")
     public void testAddWhenTwoNegativesThenNegative() {
         Calculator calculator = new Calculator();
         int expected = -14;
