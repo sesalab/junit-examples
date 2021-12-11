@@ -1,12 +1,10 @@
 package it.unisa.advanced.dao;
 
-import it.unisa.advanced.domain.Motivazione;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +12,7 @@ import java.util.List;
 public class ScanDAO {
 
     public static final String TABLE = "SCAN";
-    private GreenPassDAO greenPassDAO;
     private Connection connection;
-
-    public ScanDAO(String url, String dbName, String username, String password) {
-        try {
-            this.connection = DriverManager.getConnection(url + dbName, username, password);
-            connection.setAutoCommit(true);
-            this.greenPassDAO = new GreenPassDAO(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public ScanDAO(Connection connection) {
         this.connection = connection;
@@ -47,12 +34,24 @@ public class ScanDAO {
         return scans;
     }
 
+    public void insertScan(ScanDTO scan) {
+        String query = String.format("INSERT INTO %s (greenPass, dataVerifica, valido) VALUES (?, ?, ?);", TABLE);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, scan.getGreenPass());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(scan.getDataVerifica()));
+            preparedStatement.setBoolean(3, scan.isValido());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private ScanDTO resultSetToDTO(ResultSet rs) throws SQLException {
         ScanDTO scan = new ScanDTO();
-        String greenPassQR = rs.getString("greenPass");
-        scan.setGreenPass(greenPassDAO.getByQrCode(greenPassQR));
+        scan.setGreenPass(rs.getString("greenPass"));
         scan.setValido(rs.getBoolean("valido"));
-        scan.setDataVerifica(rs.getDate("dataVerifica").toInstant()
+        scan.setDataVerifica(rs.getTimestamp("dataVerifica").toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime());
         return scan;

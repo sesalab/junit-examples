@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class GreenPassDTO implements Serializable {
-
     private String qrCode;
     private String nomeCompleto;
     private LocalDateTime dataEmissione;

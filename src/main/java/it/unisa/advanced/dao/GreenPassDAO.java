@@ -3,7 +3,6 @@ package it.unisa.advanced.dao;
 import it.unisa.advanced.domain.Motivazione;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,17 +12,8 @@ import java.util.List;
 
 public class GreenPassDAO {
 
-    public static final String TABLE = "GREEN_PASS";
+    public static final String TABLE = "GREENPASS";
     private Connection connection;
-
-    public GreenPassDAO(String url, String dbName, String username, String password) {
-        try {
-            this.connection = DriverManager.getConnection(url + dbName, username, password);
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public GreenPassDAO(Connection connection) {
         this.connection = connection;

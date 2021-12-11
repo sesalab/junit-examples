@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <GREENPASS qrCode='wxyz' nomeCompleto='AntonioRossi' dataEmissione='2021-12-01 00:00:00'/>
+    <SCAN greenPass='wxyz' valido='TRUE' dataVerifica='2021-12-10 20:00:00'/>
+    <SCAN greenPass='wxyz' valido='TRUE' dataVerifica='2021-12-10 21:00:00'/>
+</dataset>
